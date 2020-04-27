@@ -18,12 +18,12 @@ const challenge9 = (str) => new Promise(
     }, 0)
   })
   .then((response) => {
-    if (response._ === _) {
-      throw new Error(_);
-    } else if (response._ === _) {
-      throw new Error(_)
+    if (response.status === 10) {
+      throw new Error('too many vowels');
+    } else if (response.status === 20) {
+      throw new Error('too many numbers')
     } else {
-      return __;
+      return response.value;
     };
   })
   .then(val => ({
@@ -33,7 +33,8 @@ const challenge9 = (str) => new Promise(
     val
   }))
   .catch((err) => ({
-    pass: (hasVowel(str) && err.message === 'too many vowels')
+    pass: err instanceof Error
+    && (hasVowel(str) && err.message === 'too many vowels')
       || (hasNumber(str) && err.message === 'too many numbers'),
     value: str,
     err
